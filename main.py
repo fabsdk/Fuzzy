@@ -6,10 +6,14 @@ class Fuzzy():
   def __init__(self):
     self.text = None
     self.point = 0
-    # aqui está o banco de palavras positivas, negativas e intensificadores gerado com o chatGPT
-    self.posWords = ["excepcional","ótimo", "excelente", "magnífico", "fantástico", "maravilhoso", "feliz", "espetacular", "incrível", "surpreendente", "admirável"]
-    self.negWords = ["repugnante", "péssimo", "horrível", "terrível", "desagradável","frustrante", "decepcionante", "triste", "deplorável", "desastroso", "desanimador", "desprezível"]
-    self.intenWords  = ["tão","muito", "altamente", "bastante", "extremamente", "demais", "incrivelmente", "realmente", "completamente","profundamente"]
+    # aqui está o banco de palavras positivas, negativas, intensificadores e negações gerado com o chatGPT
+    self.posWords = ["excepcional","ótimo", "excelente", "magnífico", "fantástico", 
+                     "maravilhoso", "feliz", "espetacular", "incrível", "surpreendente", "admirável"]
+    self.negWords = ["repugnante", "péssimo", "horrível", "terrível", 
+                     "desagradável","frustrante", "decepcionante", "triste", 
+                     "deplorável", "desastroso", "desanimador", "desprezível"]
+    self.intenWords  = ["tão","muito", "altamente", "bastante", "extremamente", 
+                        "demais", "incrivelmente", "realmente", "completamente","profundamente"]
     self.negatWords = ["não", "jamais", "nenhum", "nem", "nada", "nunca", "falso", "incorreto", "impossível"]
     
     # Aqui estamos definindo as variáveis antecedentes do sistema fuzzy
@@ -31,7 +35,6 @@ class Fuzzy():
     # Os valores vão de 0 a 10 onde cada valor representa um grau de sentimento
     self.emotion = ctr.Consequent(np.arange(0, 11, 1), "sentimento")
 
-    
     # Cada variável define um conjunto fuzzy diferente para representar um possível estado de sentimento, 
     # utilizada uma função de pertinência triangular cujos valores máximos são alcançados em 5,7 e 9 no caso do positivo
     self.emotion["positivo"] =  fz.trimf(self.emotion.universe, [5, 7, 9])
